@@ -8,6 +8,6 @@ CREATE TABLE book (
                       category_id INTEGER NOT NULL,
 
                       CONSTRAINT fk_book_category
-                          FOREIGN KEY (category_id)
-                              REFERENCES category(id)
+                    FOREIGN KEY (category_id)
+                            REFERENCES category(id)
 );
