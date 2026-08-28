@@ -1,7 +1,6 @@
 package com.avaali.library.repository;
 
-import com.avaali.library.enity.Category;
-import jakarta.persistence.Id;
+import com.avaali.library.entity.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

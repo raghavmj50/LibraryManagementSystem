@@ -9,11 +9,17 @@ import lombok.Setter;
 @Setter
 public class AuthorRequest {
 
-    @NotBlank(message="it cannot be blank")
-    @Size(min = 2 , max = 100 , message ="It should be between 2 to 100 characters")
+    @NotBlank(message = "Name cannot be blank")
+    @Size(
+            min = 2,
+            max = 100,
+            message = "Name must be between 2 and 100 characters"
+    )
     private String name;
 
-    @Size(max = 60, message ="maximum characters are to be 60")
+    @Size(
+            max = 60,
+            message = "Nationality cannot exceed 60 characters"
+    )
     private String nationality;
-
 }

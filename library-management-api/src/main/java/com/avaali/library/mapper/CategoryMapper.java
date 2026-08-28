@@ -1,8 +1,8 @@
 package com.avaali.library.mapper;
 
 import com.avaali.library.dto.request.CategoryRequest;
-import com.avaali.library.dto.respond.CategoryResponse;
-import com.avaali.library.enity.Category;
+import com.avaali.library.dto.response.CategoryResponse;
+import com.avaali.library.entity.Category;
 import org.springframework.stereotype.Component;
 
 @Component

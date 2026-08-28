@@ -1,8 +1,7 @@
 package com.avaali.library.controller;
 
 import com.avaali.library.dto.request.CategoryRequest;
-import com.avaali.library.dto.respond.CategoryResponse;
-import com.avaali.library.enity.Category;
+import com.avaali.library.dto.response.CategoryResponse;
 import com.avaali.library.service.CategoryService;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;

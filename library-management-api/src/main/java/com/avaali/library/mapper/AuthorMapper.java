@@ -1,8 +1,8 @@
 package com.avaali.library.mapper;
 
 import com.avaali.library.dto.request.AuthorRequest;
-import com.avaali.library.dto.respond.AuthorResponse;
-import com.avaali.library.enity.Author;
+import com.avaali.library.dto.response.AuthorResponse;
+import com.avaali.library.entity.Author;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -18,8 +18,14 @@ public class AuthorMapper {
         return author;
     }
 
-    public static AuthorResponse doResponse(Author savedauthor) {
+    public static AuthorResponse doResponse(Author savedauthor, Long bookcount) {
 
+        AuthorResponse response = new AuthorResponse();
+        response.setId(savedauthor.getId());
+        response.setName(savedauthor.getName());
+        response.setNationality(savedauthor.getNationality());
+        response.setBookCount(bookcount);
 
+        return response;
     }
 }

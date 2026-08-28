@@ -1,4 +1,4 @@
-package com.avaali.library.enity;
+package com.avaali.library.entity;
 
 
 import jakarta.persistence.*;
@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Getter

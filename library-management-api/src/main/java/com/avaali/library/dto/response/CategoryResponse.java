@@ -1,4 +1,4 @@
-package com.avaali.library.dto.respond;
+package com.avaali.library.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;

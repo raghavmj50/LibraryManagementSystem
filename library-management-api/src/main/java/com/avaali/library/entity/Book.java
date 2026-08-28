@@ -1,4 +1,4 @@
-package com.avaali.library.enity;
+package com.avaali.library.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

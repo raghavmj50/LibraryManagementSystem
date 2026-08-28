@@ -1,12 +1,9 @@
-package com.avaali.library.enity;
+package com.avaali.library.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.engine.jdbc.env.internal.BlobAndClobCreator;
-import org.springframework.resilience.annotation.EnableResilientMethods;
 
-import java.sql.Date;
 import java.time.LocalDate;
 
 @Entity
