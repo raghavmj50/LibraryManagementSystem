@@ -8,6 +8,7 @@ import com.avaali.library.mapper.CategoryMapper;
 import com.avaali.library.repository.BookRepository;
 import com.avaali.library.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -59,7 +60,7 @@ public class CategoryService {
         });
 
     }
-
+    @Cacheable(value="Category" ,key="#id")
     public CategoryResponse getCategoryById(Integer id) {
 
         Category category = categoryRepository.findById(id)

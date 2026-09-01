@@ -72,6 +72,7 @@ public class BookService {
         return bookMapper.doResponse(savedBook);
     }
 
+
     public BookResponse getBookById(Integer id) {
 
         Book book = bookRepository.findBookWithDetailsById(id)
