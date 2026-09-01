@@ -12,6 +12,7 @@ import com.avaali.library.repository.LoanRepository;
 import com.avaali.library.repository.MemberRepository;
 import com.avaali.library.specification.LoanSpecification;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -141,7 +142,7 @@ public class LoanService {
         return LoanMapper.doResponse(savedLoan);
     }
 
-
+    @Cacheable(value="Loan" , key = "#id")
     public LoanResponse getLoanById(Integer id) {
 
         Loan loan = loanRepository.findById(id)
@@ -153,6 +154,8 @@ public class LoanService {
         return LoanMapper.doResponse(loan);
     }
 
+    @Cacheable ( value="Loan",
+    key = " 'memberId=' + #memberId + 'bookId=' + #bookId + 'Status=' + #status + 'size=' + #pageable.pageSize + 'page=' + #pageable.pageNumber + 'sort=' + #pageable.sort")
     public Page<LoanResponse> getLoans(
             Integer memberId,
             Integer bookId,

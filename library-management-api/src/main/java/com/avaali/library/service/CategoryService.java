@@ -49,6 +49,10 @@ public class CategoryService {
 
     }
 
+    @Cacheable(
+            value = "categories",
+            key = "'size=' + #pageable.pageSize + ':page=' + #pageable.pageNumber + ':sort=' + #pageable.sort"
+    )
     public Page<CategoryResponse> getCategories(Pageable pageable) {
 
         Page<Category> categories = categoryRepository.findAll(pageable);

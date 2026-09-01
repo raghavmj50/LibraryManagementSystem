@@ -11,6 +11,7 @@ import com.avaali.library.mapper.MemberMapper;
 import com.avaali.library.repository.LoanRepository;
 import com.avaali.library.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,8 @@ public class MemberService {
         );
     }
 
+    @Cacheable(value = "Memeber" ,
+    key=" 'name=' +#name + 'email=' + #email + 'size=' + #pageable.pageSize + 'page=' + #pageable.pageNumber + 'sort=' + #pageable.sort ")
     public Page<MemberResponse> getMembers(
             String name,
             String email,
@@ -100,6 +103,8 @@ public class MemberService {
             );
         });
     }
+
+    @Cacheable(value="Member" , key = "#id")
     public MemberResponse getMemberById(Integer id) {
 
         Member member = memberRepository.findById(id)

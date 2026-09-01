@@ -1,6 +1,7 @@
 package com.avaali.library.repository;
 
 import com.avaali.library.entity.Author;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

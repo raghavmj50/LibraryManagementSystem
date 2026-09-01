@@ -10,6 +10,7 @@ import com.avaali.library.repository.AuthorRepository;
 import com.avaali.library.repository.BookRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -38,7 +39,9 @@ public class AuthorService {
 
     }
 
-
+    @Cacheable(
+            value = "authors",
+            key = "'name=' + #name + ':page=' + #pageable.pageNumber + ':size=' + #pageable.pageSize + ':sort=' + #pageable.sort")
     public Page<AuthorResponse> getAuthors(
             String name,
             Pageable pageable) {
@@ -72,7 +75,7 @@ public class AuthorService {
         });
     }
 
-
+    @Cacheable(value="Author" , key="#id")
     public AuthorResponse getAuthorById(Integer id) {
 
         Author author = authorRepository.findById(id)

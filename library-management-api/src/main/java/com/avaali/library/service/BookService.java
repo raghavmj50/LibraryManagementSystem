@@ -14,6 +14,7 @@ import com.avaali.library.repository.LoanRepository;
 import com.avaali.library.specification.BookSpecification;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -72,7 +73,7 @@ public class BookService {
         return bookMapper.doResponse(savedBook);
     }
 
-
+    @Cacheable(value="books" , key="#id")
     public BookResponse getBookById(Integer id) {
 
         Book book = bookRepository.findBookWithDetailsById(id)
@@ -82,6 +83,11 @@ public class BookService {
 
         return bookMapper.doResponse(book);
     }
+
+    @Cacheable(
+            value = "books",
+            key = "'title=' + #title + ':authorName=' + #authorName + ':categoryId=' + #categoryId + ':availableOnly=' + #availableOnly + ':publishedAfter=' + #publishedAfter + ':size=' + #pageable.pageSize + ':page=' + #pageable.pageNumber + ':sort=' + #pageable.sort"
+    )
 
     public Page<BookResponse> getBooks(
             String title,
