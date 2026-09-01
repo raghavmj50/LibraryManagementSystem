@@ -18,6 +18,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Clock;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -28,6 +29,8 @@ public class LoanService {
     private final LoanRepository loanRepository;
     private final MemberRepository memberRepository;
     private final BookRepository bookRepository;
+    private final Clock clock;
+
 
     @Transactional
     public LoanResponse createLoan(LoanRequest request) {
@@ -104,7 +107,7 @@ public class LoanService {
             );
         }
 
-        LocalDate returnDate = LocalDate.now();
+        LocalDate returnDate = LocalDate.now(clock);
 
         loan.setReturnDate(returnDate);
 
