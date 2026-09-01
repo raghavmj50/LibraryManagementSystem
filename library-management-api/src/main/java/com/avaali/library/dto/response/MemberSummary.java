@@ -9,4 +9,5 @@ public class MemberSummary {
 
     private Integer id;
     private String name;
+
 }

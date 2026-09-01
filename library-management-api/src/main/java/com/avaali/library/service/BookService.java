@@ -63,11 +63,7 @@ public class BookService {
         }
 
         // 5. Create Book entity
-        Book book = bookMapper.create(
-                request,
-                category,
-                authors
-        );
+        Book book = bookMapper.create(request, category, authors);
 
         // 6. Save Book
         Book savedBook = bookRepository.save(book);
@@ -78,7 +74,7 @@ public class BookService {
 
     public BookResponse getBookById(Integer id) {
 
-        Book book = bookRepository.findById(id)
+        Book book = bookRepository.findBookWithDetailsById(id)
                 .orElseThrow(() -> new BookNotFoundException(
                         "Book not found"
                 ));

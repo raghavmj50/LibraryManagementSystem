@@ -46,8 +46,7 @@ public class BookController {
             Pageable pageable) {
 
         Page<BookResponse> response =
-                bookService.getBooks(
-                        title,
+                bookService.getBooks(title,
                         authorName,
                         categoryId,
                         availableOnly,

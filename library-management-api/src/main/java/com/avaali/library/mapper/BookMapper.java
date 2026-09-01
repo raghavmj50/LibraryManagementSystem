@@ -14,10 +14,7 @@ import java.util.List;
 @Component
 public class BookMapper {
 
-    public Book create(
-            BookRequest request,
-            Category category,
-            List<Author> authors) {
+    public Book create(BookRequest request, Category category, List<Author> authors) {
 
         Book book = new Book();
 

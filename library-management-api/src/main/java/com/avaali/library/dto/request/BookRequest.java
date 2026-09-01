@@ -11,33 +11,18 @@ import java.util.List;
 public class BookRequest {
 
     @NotBlank(message = "ISBN cannot be blank")
-    @Pattern(
-            regexp = "\\d{13}",
-            message = "ISBN must contain exactly 13 digits"
-    )
+    @Pattern(regexp = "\\d{13}", message = "ISBN must contain exactly 13 digits")
     private String isbn;
 
     @NotBlank(message = "Title cannot be blank")
-    @Size(
-            max = 200,
-            message = "Title cannot exceed 200 characters"
-    )
+    @Size(max = 200, message = "Title cannot exceed 200 characters")
     private String title;
 
-    @Min(
-            value = 1450,
-            message = "Published year must be at least 1450"
-    )
+    @Min(value = 1450, message = "Published year must be at least 1450")
     private Integer publishedYear;
 
-    @Min(
-            value = 1,
-            message = "Total copies must be at least 1"
-    )
-    @Max(
-            value = 1000,
-            message = "Total copies cannot exceed 1000"
-    )
+    @Min(value = 1, message = "Total copies must be at least 1")
+    @Max(value = 1000, message = "Total copies cannot exceed 1000")
     private Integer totalCopies;
 
     @NotNull(message = "Category ID is required")
