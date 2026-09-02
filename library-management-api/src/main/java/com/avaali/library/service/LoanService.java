@@ -1,5 +1,6 @@
 package com.avaali.library.service;
 
+import com.avaali.library.dto.event.LoanCreatedEvent;
 import com.avaali.library.dto.request.LoanRequest;
 import com.avaali.library.dto.response.LoanResponse;
 import com.avaali.library.entity.Book;
@@ -7,6 +8,8 @@ import com.avaali.library.entity.Loan;
 import com.avaali.library.entity.Member;
 import com.avaali.library.exception.*;
 import com.avaali.library.mapper.LoanMapper;
+import com.avaali.library.messaging.LoanEventPublisher;
+import com.avaali.library.messaging.LoanKafkaPublisher;
 import com.avaali.library.repository.BookRepository;
 import com.avaali.library.repository.LoanRepository;
 import com.avaali.library.repository.MemberRepository;
@@ -30,6 +33,8 @@ public class LoanService {
     private final LoanRepository loanRepository;
     private final MemberRepository memberRepository;
     private final BookRepository bookRepository;
+    private final LoanEventPublisher loanEventPublisher;
+    private final LoanKafkaPublisher loanKafkaPublisher;
     private final Clock clock;
 
 
@@ -87,6 +92,32 @@ public class LoanService {
 
         // 7. Save loan
         Loan savedLoan = loanRepository.save(loan);
+
+        loanEventPublisher.publishLoanCreated(
+                new LoanCreatedEvent(
+                        savedLoan.getId(),
+                        savedLoan.getMember().getId(),
+                        savedLoan.getBook().getId(),
+                        savedLoan.getMember().getName(),
+                        savedLoan.getMember().getEmail(),
+                        savedLoan.getBook().getTitle(),
+                        savedLoan.getDueDate()
+                )
+        );
+
+        LoanCreatedEvent event = new LoanCreatedEvent(
+                savedLoan.getId(),
+                savedLoan.getMember().getId(),
+                savedLoan.getBook().getId(),
+                savedLoan.getMember().getName(),
+                savedLoan.getMember().getEmail(),
+                savedLoan.getBook().getTitle(),
+                savedLoan.getDueDate()
+        );
+
+        loanKafkaPublisher.publishLoanCreated(event);
+
+
 
         // 8. Return response
         return LoanMapper.doResponse(savedLoan);
